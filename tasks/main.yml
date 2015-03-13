@@ -1,0 +1,9 @@
+---
+# Configures Apache to work with WSGI applications
+
+- name: install apache module and restart apache
+  apt: update_cache=yes cache_valid_time=3600 pkg={{ item }} state=present # won't update if done under an hour ago
+  with_items:
+    - libapache2-mod-wsgi
+  notify:
+    - Restart Apache
