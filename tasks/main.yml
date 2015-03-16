@@ -7,3 +7,5 @@
     - libapache2-mod-wsgi
   notify:
     - Restart Apache
+
+- include: configure_default_virtualhost.yml
