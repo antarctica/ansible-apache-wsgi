@@ -1,0 +1,13 @@
+# {{ ansible_managed }}
+
+WSGIScriptAlias {{ apache_wsgi_option_script_alias }}
+
+<Directory {{ apache_wsgi_option_script_alias_directory }}>
+    Order allow,deny
+    Allow from all
+    Options All
+    AllowOverride All
+    Require all granted
+</Directory>
+
+WSGIPassAuthorization {{ apache_wsgi_option_pass_authorization }}
