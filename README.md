@@ -7,6 +7,7 @@ Configures Apache to support WSGI compatible applications through the WSGI Apach
 ## Overview
 
 * Restarts Apache to pick up WSGI module
+* Creates an includes file containing module configuration and loads this within the default virtual host
 
 ## Availability
 
@@ -19,6 +20,31 @@ This role is designed for internal use but if useful can be shared publicly.
 #### BAS Ansible Role Collection (BARC)
 
 * `apache`
+
+### Variables
+
+* `apache_wsgi_config_file_path`
+    * Path consisting of directory and file name for the file that will contain this module's configuration options
+    * This variable **MUST** be a valid UNIX path and **SHOULD NOT** exist.
+    * Default: "/etc/apache2/conf-available/mod-wsgi.conf"
+* `apache_wsgi_option_script_alias_directory`
+    * A directory that will contain WSGI scripts, used by the script_alias directive to forward requests to WSGI scripts
+    * This variable **MUST** be a valid UNIX path without a trailing slash (i.e. `/`).
+    * If a non-default root is used you **MUST** ensure the `www-data` group has access.
+    * By default it is assumed a "wsgi-scripts" directory will exist in the document root.
+    * Default: "{{ apache_default_var_www_document_root }}/wsgi-scripts"
+* apache_wsgi_option_script_alias`
+    * Maps a URL to a filesystem location and designates the target as a WSGI script
+    * For more information see the [module's documentation for this directive](https://code.google.com/p/modwsgi/wiki/ConfigurationDirectives#WSGIScriptAlias).
+    * By default all requests are forwarded to the wsgi_scripts directory set by `apache_wsgi_option_script_alias_directory`.
+    * Default: "/ {{ apache_wsgi_option_script_alias_directory }}"
+
+* `apache_wsgi_option_pass_authorization`
+    * Enable/Disable passing of authorisation headers
+    * For more information see the [module's documentation for this directive](https://code.google.com/p/modwsgi/wiki/ConfigurationDirectives#WSGIPassAuthorization).
+    * You **MUST** quote this value or Ansible will evaluate this value to a "True" or "False" which are not valid.
+    * Allowed values: "on" or "off".
+    * Default: "On"
 
 ## Contributing
 
