@@ -13,10 +13,10 @@ galaxy_info:
 
 armadillo_info:
   name: Apache WSGI
-  version: 0.2.0
+  version: 0.2.1
   source: git@stash.ceh.ac.uk:7999/barc/apache-wsgi.git
   dependencies:
-  - git@stash.ceh.ac.uk:7999/barc/apache.git#v0.4.2
+  - git@stash.ceh.ac.uk:7999/barc/apache.git#v0.5.0
 
 dependencies:
   - apache
