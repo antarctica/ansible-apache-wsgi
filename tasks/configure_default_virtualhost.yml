@@ -4,13 +4,13 @@
   template: src=etc/apache2/conf-available/wsgi.conf.j2 dest="{{ apache_wsgi_config_file_path }}"
 
 - name: add module configuration to default apache virtual host
-  lineinfile: dest=/etc/apache2/sites-available/default line="    include {{ apache_wsgi_config_file_path }}" insertbefore="# Marker - Apache module configuration" state=present
+  lineinfile: dest=/etc/apache2/sites-available/default line="    include {{ apache_wsgi_config_file_path }}" insertafter="# Marker - Apache module configuration" state=present
   notify:
     - Restart Apache
   when: ansible_distribution_version == "12.04"
 
 - name: add module configuration to default apache virtual host
-  lineinfile: dest=/etc/apache2/sites-available/000-default.conf line="    include {{ apache_wsgi_config_file_path }}" insertbefore="# Marker - Apache module configuration" state=present
+  lineinfile: dest=/etc/apache2/sites-available/000-default.conf line="    include {{ apache_wsgi_config_file_path }}" insertafter="# Marker - Apache module configuration" state=present
   notify:
     - Restart Apache
   when: ansible_distribution_version == "14.04"
